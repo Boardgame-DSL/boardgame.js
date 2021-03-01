@@ -40,6 +40,14 @@ globalThis.boardgame = {
 	 */
 	addEventListener: (eventName: keyof typeof eventListeners, f: Function) => eventListeners[eventName].push(f),
 	/**
+	 * Removes a previously added event listener.
+	 * @param eventName The event to listen to.
+	 * @param f         The callback function.
+	 */
+	removeEventListener: (eventName: keyof typeof eventListeners, f: Function) => {
+		eventListeners[eventName].splice(eventListeners[eventName].indexOf(f), 1);
+	},
+	/**
 	 * Starts a new game with the Haskell model. Might cancel any current game.
 	 */
 	startGame: () => { throw new Error("Not initialized yet!"); },
