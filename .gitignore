@@ -88,4 +88,3 @@ typings/
 .dynamodb/
 
 dist/
-bundle/
