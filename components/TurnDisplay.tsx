@@ -11,13 +11,15 @@ export class TurnDisplay extends Component<{}, State> {
 		this.state = {
 			player: null,
 		};
+
+		this.onTurn = this.onTurn.bind(this);
 	}
 
 	public componentDidMount(): void {
-		(window as any).boardgame.addEventListener("turn", this.onTurn.bind(this));
+		window.boardgame.addEventListener("turn", this.onTurn);
 	}
 	public componentWillUnmount(): void {
-		(window as any).boardgame.removeEventListener("turn", this.onTurn.bind(this));
+		window.boardgame.removeEventListener("turn", this.onTurn);
 	}
 
 	private onTurn(player: 1 | 2): void {

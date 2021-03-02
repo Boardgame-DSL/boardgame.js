@@ -17,12 +17,16 @@ export class NotificationArea extends Component<{}, State> {
 		this.state = {
 			notifications: new Array<Notification>(),
 		};
+
+		this.onInvalidInput = this.onInvalidInput.bind(this);
+		this.onInvalidMove = this.onInvalidMove.bind(this);
+		this.onInitialized = this.onInitialized.bind(this);
 	}
 
 	public componentDidMount(): void {
-		(window as any).boardgame.addEventListener("invalidInput", this.onInvalidInput.bind(this));
-		(window as any).boardgame.addEventListener("invalidMove", this.onInvalidMove.bind(this));
-		(window as any).boardgame.initialized.then(this.onInitialized.bind(this));
+		window.boardgame.addEventListener("invalidInput", this.onInvalidInput);
+		window.boardgame.addEventListener("invalidMove", this.onInvalidMove);
+		window.boardgame.initialized.then(this.onInitialized);
 	}
 
 	private onInvalidInput(): void {
@@ -50,8 +54,8 @@ export class NotificationArea extends Component<{}, State> {
 	}
 
 	public componentWillUnmount(): void {
-		(window as any).boardgame.removeEventListener("invalidInput", this.onInvalidInput.bind(this));
-		(window as any).boardgame.removeEventListener("invalidMove", this.onInvalidMove.bind(this));
+		window.boardgame.removeEventListener("invalidInput", this.onInvalidInput);
+		window.boardgame.removeEventListener("invalidMove", this.onInvalidMove);
 		for (const notification of this.state.notifications) {
 			window.clearTimeout(notification.timeoutId);
 		}

@@ -2,11 +2,11 @@
  * A collection of event listeners for the different events.
  */
 const eventListeners = {
-	"state": new Array<Function>(),
-	"turn": new Array<Function>(),
-	"invalidInput": new Array<Function>(),
-	"invalidMove": new Array<Function>(),
-	"gameOver": new Array<Function>(),
+	"state": new Array<(s: any) => void>(),
+	"turn": new Array<(p: 1 | 2) => void>(),
+	"invalidInput": new Array<() => void>(),
+	"invalidMove": new Array<() => void>(),
+	"gameOver": new Array<(p: 0 | 1 | 2) => void>(),
 } as const;
 
 /**
@@ -14,47 +14,60 @@ const eventListeners = {
  * @param eventName The name of the event.
  * @param args      Arguments to be forwarded to the callbacks.
  */
-function invoke(eventName: keyof typeof eventListeners, ...args: Array<any>): void {
-	eventListeners[eventName].forEach(f => f(...args));
+function invoke<T extends keyof typeof eventListeners>(eventName: T, ...args: Parameters<typeof eventListeners[T][number]>): void {
+	eventListeners[eventName].forEach(f => (f as any)(...args));
 }
 
-let tempReady;
-
-globalThis.boardgame = {
+let tempReady: () => void;
+const internalBoardgame = {
 	_putState: (s: any) => invoke("state", s),
-	_putTurn: (p: any) => invoke("turn", p),
-	_getMove: () => new Promise(r => globalThis.boardgame.inputMove = r),
+	_putTurn: (p: 1 | 2) => invoke("turn", p),
+	_getMove: () => new Promise(r => (window.boardgame as any).inputMove = r),
 	_putInvalidInput: () => invoke("invalidInput"),
 	_putInvalidMove: () => invoke("invalidMove"),
-	_putGameOver: p => invoke("gameOver", p),
+	_putGameOver: (p: 0 | 1 | 2) => invoke("gameOver", p),
 	_ready: () => {},
-
+};
+const boardgame = {
 	/**
 	 * A Promise that resolves once the Haskell model is ready.
 	 */
-	initialized: new Promise(r => tempReady = r),
+	initialized: new Promise<void>(r => tempReady = r),
 	/**
 	 * Adds a function that listens to events from the Haskell model.
 	 * @param eventName The event to listen to.
 	 * @param f         The callback function.
 	 */
-	addEventListener: (eventName: keyof typeof eventListeners, f: Function) => eventListeners[eventName].push(f),
+	addEventListener: <T extends keyof typeof eventListeners>(eventName: T, f: typeof eventListeners[T][number]): void => {
+		eventListeners[eventName].push(f as any);
+	},
 	/**
 	 * Removes a previously added event listener.
 	 * @param eventName The event to listen to.
 	 * @param f         The callback function.
 	 */
-	removeEventListener: (eventName: keyof typeof eventListeners, f: Function) => {
-		eventListeners[eventName].splice(eventListeners[eventName].indexOf(f), 1);
+	removeEventListener: <T extends keyof typeof eventListeners>(eventName: T, f: typeof eventListeners[T][number]): void => {
+		eventListeners[eventName].splice(eventListeners[eventName].indexOf(f as any), 1);
 	},
 	/**
 	 * Starts a new game with the Haskell model. Might cancel any current game.
 	 */
-	startGame: () => { throw new Error("Not initialized yet!"); },
+	startGame: (): void => { throw new Error("Not initialized yet!"); },
 	/**
 	 * Sends a move to the Haskell backend.
 	 * @param c The "coordinate" of the move.
 	 */
-	inputMove: (c: any) => { throw new Error("Not initialized yet!"); },
+	inputMove: (c: any): void => { throw new Error("Not initialized yet!"); },
 } as const;
-globalThis.boardgame._ready = tempReady;
+internalBoardgame._ready = tempReady;
+
+export {};
+declare global {
+	interface Window {
+		boardgame: typeof boardgame;
+	}
+}
+window.boardgame = {
+	...internalBoardgame,
+	...boardgame,
+};

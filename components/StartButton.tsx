@@ -14,15 +14,17 @@ export class StartButton extends Component<{}, State> {
 			isInitialized: false,
 			isRestart: false,
 		};
+
+		this.onGameOver = this.onGameOver.bind(this);
 	}
 
 	public componentDidMount(): void {
 		this.waitForInitialized();
-		(window as any).boardgame.addEventListener("gameOver", this.onGameOver.bind(this));
+		window.boardgame.addEventListener("gameOver", this.onGameOver);
 	}
 
 	private async waitForInitialized(): Promise<void> {
-		await (window as any).boardgame.initialized;
+		await window.boardgame.initialized;
 		this.setState({
 			isInitialized: true,
 		});
@@ -34,11 +36,11 @@ export class StartButton extends Component<{}, State> {
 	}
 
 	public componentWillUnmount(): void {
-		(window as any).boardgame.removeEventListener("gameOver", this.onGameOver.bind(this));
+		window.boardgame.removeEventListener("gameOver", this.onGameOver);
 	}
 
 	private startGame(): void {
-		(window as any).boardgame.startGame();
+		window.boardgame.startGame();
 		this.setState({
 			isRestart: true,
 		});
