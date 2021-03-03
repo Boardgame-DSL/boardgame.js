@@ -6,7 +6,7 @@ const eventListeners = {
 	"turn": new Array<(p: 1 | 2) => void>(),
 	"invalidInput": new Array<() => void>(),
 	"invalidMove": new Array<() => void>(),
-	"gameOver": new Array<(p: 0 | 1 | 2) => void>(),
+	"gameOver": new Array<(p: null | 1 | 2) => void>(),
 } as const;
 
 /**
@@ -25,7 +25,7 @@ const internalBoardgame = {
 	_getMove: () => new Promise(r => (window.boardgame as any).inputMove = r),
 	_putInvalidInput: () => invoke("invalidInput"),
 	_putInvalidMove: () => invoke("invalidMove"),
-	_putGameOver: (p: 0 | 1 | 2) => invoke("gameOver", p),
+	_putGameOver: (p: null | 1 | 2) => invoke("gameOver", p),
 	_ready: () => {},
 };
 const boardgame = {
