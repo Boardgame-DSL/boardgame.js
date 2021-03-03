@@ -3,9 +3,10 @@
 	"version": "0.0.1",
 	"scripts": {
 		"start": "webpack-cli serve --config=./example.config.js",
-		"build": "npm run build-lib && npm run build-components",
+		"build": "npm run build-lib && npm run build-components && npm run build-example",
 		"build-lib": "webpack-cli --mode=production --config=./webpack.config.js",
-		"build-components": "webpack-cli --mode=production --config=./components.config.js"
+		"build-components": "webpack-cli --mode=production --config=./components.config.js",
+		"build-example": "webpack-cli --mode=production --config=./example.config.js"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.2",
