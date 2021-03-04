@@ -6,6 +6,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Example</title>
 		<script src="./boardgame.js"></script>
+		<style>
+			html, body {
+				margin: 0px;
+			}
+			.graph-container {
+				width: 100vw;
+				height: 100vh;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				z-index: -1;
+			}
+			.graph-container canvas {
+				outline: none !important;
+			}
+		</style>
 	</head>
 	<body>
 		<app/>
