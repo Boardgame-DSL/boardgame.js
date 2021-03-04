@@ -6,8 +6,10 @@ import "../src";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<StartButton/>
-		<TurnDisplay/>
+		<div className="controls">
+			<StartButton/>
+			<TurnDisplay/>
+		</div>
 		<GameOverStatus/>
 		<HexDisplay/>
 		<NotificationArea/>

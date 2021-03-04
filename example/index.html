@@ -9,16 +9,69 @@
 		<style>
 			html, body {
 				margin: 0px;
+				overflow: hidden;
 			}
+			.controls {
+				display: block;
+				position: fixed;
+				top: 20px;
+				left: 20px;
+				padding: 5px;
+				background-color: white;
+			}
+			.game-over-status {
+				position: fixed;
+				top: 50vh;
+				left: 50vw;
+				transform: translate(-50%, -50%);
+				pointer-events: none;
+			}
+			.game-over-status [class|="victor"] {
+				text-shadow: 1px 1px 0px white, 1px -1px 0px white, -1px 1px 0px white, -1px -1px 0px white;
+				font-size: 4em;
+				opacity: 0;
+				animation: remove 5s linear;
+			}
+			@keyframes remove {
+				5% { opacity: 1; }
+				95% { opacity: 1; }
+				100% { opacity: 0; }
+			}
+			.game-over-status .victor-1 { color: blue; }
+			.game-over-status .victor-2 { color: red; }
 			.graph-container {
 				width: 100vw;
 				height: 100vh;
 				position: fixed;
-				top: 0px;
-				left: 0px;
+				border-top: 20px solid red;
+				border-bottom: 20px solid red;
+				border-left: 20px solid blue;
+				border-right: 20px solid blue;
+				box-sizing: border-box;
 				z-index: -1;
 			}
-			.graph-container canvas {
+			.notification-area {
+				display: flex;
+				flex-direction: column-reverse;
+				align-items: center;
+				position: fixed;
+				left: 0px;
+				right: 0px;
+				bottom: 25px;
+				pointer-events: none;
+			}
+			.notification-area .notification {
+				border: 2px solid red;
+				border-radius: 2px;
+				padding: 10px;
+				background-color: white;
+				margin-top: 5px;
+			}
+			.notification-area .notification * {
+				margin: 0px;
+				padding: 0px;
+			}
+			* {
 				outline: none !important;
 			}
 		</style>
