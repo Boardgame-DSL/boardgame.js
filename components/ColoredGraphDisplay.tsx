@@ -1,7 +1,48 @@
 import { Data, Network, Node, Edge, Options } from "vis-network/standalone";
 import React, { Component, createRef, ReactNode, RefObject } from "react";
 
-export type ColoredGraph<i, a, b> = Array<[i, [a, Array<[i, b]>]]>;
+export interface ColoredGraph<i, a, b> extends Array<[i, [a, Array<[i, b]>]]> { }
+
+type ColoredGraphObject<a, b> = { [key: string]: [a, { [key: string]: b }] };
+
+/**
+ * If the key to the `ColoredGraph` map is a number or a string in the Haskell
+ * backend, Haskell will spit out an object instead of a key-value-list. This
+ * function transforms such objects to key-value-lists.
+ * @param keyTransformer A function that transforms `string`s into `i`s.
+ * @param map            The object given by the Haskell backend.
+ */
+function mapToKeyValue<i, a, b>(keyTransformer: (key: string) => i, map: ColoredGraphObject<a, b>): ColoredGraph<i, a, b> {
+	return Object.entries(map)
+		.map(([i, [a, edges]]) => [
+			keyTransformer(i),
+			[
+				a,
+				Object.entries(edges)
+					.map(([i, b]) => [keyTransformer(i), b])
+			]
+		]);
+}
+/**
+ * If the key to the `ColoredGraph` map is a string in the Haskell backend,
+ * Haskell will spit out an object instead of a key-value-list. This
+ * function transforms such objects to key-value-lists.
+ * @param map The object given by the Haskell backend.
+ */
+const mapToKeyValueString: <i, a, b>(map: ColoredGraphObject<a, b>) => ColoredGraph<i, a, b> =
+	mapToKeyValue.bind(null, (k: string) => k);
+/**
+ * If the key to the `ColoredGraph` map is a number in the Haskell backend,
+ * Haskell will spit out an object instead of a key-value-list. This
+ * function transforms such objects to key-value-lists.
+ * @param map The object given by the Haskell backend.
+ */
+const mapToKeyValueNumber: <i, a, b>(map: ColoredGraphObject<a, b>) => ColoredGraph<i, a, b> =
+	mapToKeyValue.bind(null, (k: string) => parseFloat(k));
+export const ColoredGraph = {
+	mapToKeyValueString,
+	mapToKeyValueNumber,
+};
 
 export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 	private readonly divRef: RefObject<HTMLDivElement>;
