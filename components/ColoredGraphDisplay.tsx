@@ -7,6 +7,8 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 	private readonly divRef: RefObject<HTMLDivElement>;
 	private network: Network;
 
+	protected graph: ColoredGraph<i, a, b>;
+
 	public constructor(props: {}) {
 		super(props);
 
@@ -44,6 +46,10 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 
 	protected networkOptions(): Options {
 		return { };
+	}
+
+	protected updateState(s: any): void {
+		this.graph = s as ColoredGraph<i, a, b>;
 	}
 
 	protected constructNode(i: i, a: a, ibs: Array<[i, b]>): Node {
@@ -99,8 +105,9 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 			edges,
 		};
 	}
-	private renderGraph(state: ColoredGraph<i, a, b>): void {
-		const graph = this.buildGraph(state);
+	private renderGraph(s: any): void {
+		this.updateState(s);
+		const graph = this.buildGraph(this.graph);
 		this.network.setData(graph);
 	}
 
