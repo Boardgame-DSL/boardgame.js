@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { GameOverStatus, NotificationArea, StartButton, TurnDisplay } from "../components";
-import { HexDisplay } from "./HexDisplay";
+import { SSGDisplay } from "./SSGDisplay";
 import "../src";
 
 ReactDOM.render(
@@ -11,7 +11,7 @@ ReactDOM.render(
 			<TurnDisplay/>
 		</div>
 		<GameOverStatus/>
-		<HexDisplay/>
+		<SSGDisplay/>
 		<NotificationArea/>
 	</React.StrictMode>,
 	document.querySelector("app")
