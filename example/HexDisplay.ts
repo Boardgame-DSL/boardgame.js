@@ -12,7 +12,7 @@ export class HexDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
-	protected constructNode(i: i, a: a, bis: Array<[b, i]>): Node {
+	protected constructNode(i: i, a: a, ibs: Array<[i, b]>): Node {
 		return {
 			shape: "hexagon",
 			size: 50,
@@ -21,11 +21,11 @@ export class HexDisplay extends ColoredGraphDisplay<i, a, b> {
 			y: i[1] * 95 + i[0] * 45,
 		};
 	}
-	protected constructEdge(i: i, a: a, b: b, ni: i): Edge {
+	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
 		return { };
 	}
 
-	protected onNodeClicked(i: i, a: a, bis: Array<[b, i]>): void {
+	protected onNodeClicked(i: i, a: a, ibs: Array<[i, b]>): void {
 		window.boardgame.inputMove(i);
 	}
 }
