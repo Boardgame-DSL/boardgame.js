@@ -38,6 +38,7 @@ export class GameOverStatus extends Component<{}, State> {
 
 	public componentWillUnmount(): void {
 		window.boardgame.removeEventListener("gameOver", this.onGameOver);
+		window.boardgame.removeEventListener("state", this.onState);
 	}
 
 	public render(): ReactNode {
