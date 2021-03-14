@@ -3,6 +3,7 @@ import { Component, ReactNode } from "react";
 
 export interface Properties {
 	gameName?: string;
+	isRestart?: boolean;
 }
 
 interface State {
@@ -20,7 +21,7 @@ export class StartButton extends Component<Properties, State> {
 
 		this.state = {
 			isInitialized: false,
-			isRestart: false,
+			isRestart: this.props.isRestart ?? false,
 		};
 
 		this.onGameOver = this.onGameOver.bind(this);
