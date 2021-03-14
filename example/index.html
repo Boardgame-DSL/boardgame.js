@@ -11,6 +11,31 @@
 				margin: 0px;
 				overflow: hidden;
 			}
+			.selector {
+				display: inline-block;
+				position: fixed;
+				top: 50vh;
+				left: 50vw;
+				transform: translate(-50%, -50%);
+			}
+			.selector p {
+				font-size: 2em;
+			}
+			.selector ul {
+				list-style: none;
+				padding: 0px;
+				text-align: center;
+				font-size: 1.25em;
+			}
+			.selector ul li {
+				margin-bottom: 0.5em;
+			}
+			.selector ul li a {
+				text-decoration: none;
+			}
+			.selector ul li a:hover {
+				text-decoration: underline;
+			}
 			.controls {
 				display: block;
 				position: fixed;
@@ -43,12 +68,14 @@
 				width: 100vw;
 				height: 100vh;
 				position: fixed;
+				box-sizing: border-box;
+				z-index: -1;
+			}
+			.Hex .graph-container {
 				border-top: 20px solid red;
 				border-bottom: 20px solid red;
 				border-left: 20px solid blue;
 				border-right: 20px solid blue;
-				box-sizing: border-box;
-				z-index: -1;
 			}
 			.notification-area {
 				display: flex;
