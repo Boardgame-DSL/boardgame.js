@@ -111,11 +111,20 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 		let isFirst = true;
 		const nodes = new Array<Node>();
 		for (const [i, [a, ibs]] of state) {
+			let willClick: boolean = false;
 			nodes.push({
 				...this.constructNode(i, a, ibs),
 				id: JSON.stringify(i),
 				chosen: {
-					node: this.onNodeClicked.bind(this, i, a, ibs),
+					node: () => {
+						if (!willClick) {
+							willClick = true;
+							window.setTimeout(() => {
+								willClick = false;
+								this.onNodeClicked(i, a, ibs);
+							}, 0);
+						}
+					},
 					label: false,
 				},
 				...(isFirst ? {
@@ -129,12 +138,21 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 		const edges = new Array<Edge>();
 		for (const [i, [a, neighbours]] of state) {
 			for (const [ni, b] of neighbours) {
+				let willClick: boolean = false;
 				edges.push({
 					...this.constructEdge(i, a, ni, b),
 					from: JSON.stringify(i),
 					to: JSON.stringify(ni),
 					chosen: {
-						edge: this.onEdgeClicked.bind(this, i, a, ni, b),
+						edge: (() => {
+							if (!willClick) {
+								willClick = true;
+								window.setTimeout(() => {
+									willClick = false;
+									this.onEdgeClicked(i, a, ni, b);
+								}, 0);
+							}
+						}) as any,
 						label: false,
 					}
 				});
