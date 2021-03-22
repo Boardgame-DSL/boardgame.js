@@ -50,9 +50,9 @@ const boardgame = {
 		eventListeners[eventName].splice(eventListeners[eventName].indexOf(f as any), 1);
 	},
 	/**
-	 * Starts a new game with the Haskell model. Might cancel any current game.
+	 * A collection of functions used to start games in the Haskell backend.
 	 */
-	startGame: (): void => { throw new Error("Not initialized yet!"); },
+	games: {} as Readonly<{ [name: string]: () => void }>,
 	/**
 	 * Sends a move to the Haskell backend.
 	 * @param c The "coordinate" of the move.

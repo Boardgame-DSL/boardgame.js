@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { GameOverStatus, NotificationArea, StartButton, TurnDisplay } from "../components";
+import { MultipleGames, NotificationArea } from "../components";
 import { HexDisplay } from "./HexDisplay";
+import { TicTacToeDisplay } from "./TicTacToeDisplay";
 import "../src";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<div className="controls">
-			<StartButton/>
-			<TurnDisplay/>
-		</div>
-		<GameOverStatus/>
-		<HexDisplay/>
+		<MultipleGames
+			games={{
+				"Hex": <HexDisplay/>,
+				"TicTacToe": <TicTacToeDisplay/>,
+			}}
+		/>
 		<NotificationArea/>
 	</React.StrictMode>,
 	document.querySelector("app")

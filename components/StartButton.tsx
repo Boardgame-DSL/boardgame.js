@@ -1,18 +1,27 @@
 import React from "react";
 import { Component, ReactNode } from "react";
 
+export interface Properties {
+	gameName?: string;
+	isRestart?: boolean;
+}
+
 interface State {
 	isInitialized: boolean;
 	isRestart: boolean;
 }
 
-export class StartButton extends Component<{}, State> {
-	public constructor(props: {}) {
+export class StartButton extends Component<Properties, State> {
+	private get gameName(): string {
+		return this.props.gameName ?? "default";
+	}
+
+	public constructor(props: Properties) {
 		super(props);
 
 		this.state = {
 			isInitialized: false,
-			isRestart: false,
+			isRestart: this.props.isRestart ?? false,
 		};
 
 		this.onGameOver = this.onGameOver.bind(this);
@@ -40,16 +49,18 @@ export class StartButton extends Component<{}, State> {
 	}
 
 	private startGame(): void {
-		window.boardgame.startGame();
-		this.setState({
-			isRestart: true,
-		});
+		if (this.gameName in window.boardgame.games) {
+			window.boardgame.games[this.gameName]();
+			this.setState({
+				isRestart: true,
+			});
+		}
 	}
 
 	public render(): ReactNode {
 		return (
 			<button
-				disabled={!this.state.isInitialized}
+				disabled={!this.state.isInitialized || !(this.gameName in window.boardgame.games)}
 				onClick={this.startGame.bind(this)}
 			>
 				{this.state.isRestart ? "Restart" : "Start"}
