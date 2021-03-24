@@ -1,6 +1,7 @@
 {
 	"name": "boardgame",
 	"version": "0.0.1",
+	"license": "MIT",
 	"scripts": {
 		"start": "webpack-cli serve --config=./example.config.js",
 		"build": "npm run build-lib && npm run build-components && npm run build-example",
