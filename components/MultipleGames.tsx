@@ -14,6 +14,13 @@ interface State {
 }
 
 export class MultipleGames extends Component<Properties, State> {
+	private static readyStringAsClassName(string: string): string {
+		return string.replace(
+			/\W/g,
+			m => /^\s$/.test(m) ? "-" : ""
+		);
+	}
+
 	public constructor(props: Properties) {
 		super(props);
 
@@ -84,7 +91,7 @@ export class MultipleGames extends Component<Properties, State> {
 	}
 	private renderGame(): ReactNode {
 		return (
-			<div className={`game active ${this.state.activeGame}`}>
+			<div className={`game active ${MultipleGames.readyStringAsClassName(this.state.activeGame)}`}>
 				<div className="controls">
 					<button
 						onClick={() => this.setState({ activeGame: null })}
