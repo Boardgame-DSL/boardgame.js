@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { MultipleGames, NotificationArea } from "../components";
 import { HexDisplay } from "./HexDisplay";
-import { TicTacToeDisplay } from "./TicTacToeDisplay";
+import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
 import "../src";
 
 ReactDOM.render(
@@ -10,7 +10,7 @@ ReactDOM.render(
 		<MultipleGames
 			games={{
 				"Hex": <HexDisplay/>,
-				"TicTacToe": <TicTacToeDisplay/>,
+				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
 			}}
 		/>
 		<NotificationArea/>

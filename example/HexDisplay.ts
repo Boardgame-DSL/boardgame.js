@@ -1,11 +1,20 @@
-import { ColoredGraphDisplay } from "../components";
+import { ColoredGraph, ColoredGraphDisplay } from "../components";
 import { Node, Edge, Options } from "vis-network/standalone";
 
 type i = [number, number];
 type a = null | 1 | 2;
 type b = [number, number];
 
+interface State {
+	n: number;
+	board: ColoredGraph<i, a, b>;
+}
+
 export class HexDisplay extends ColoredGraphDisplay<i, a, b> {
+	protected updateState(s: State): void {
+		super.updateState(s.board);
+	}
+
 	protected networkOptions(): Options {
 		return {
 			physics: false,

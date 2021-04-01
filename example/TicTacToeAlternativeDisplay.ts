@@ -1,15 +1,20 @@
-import { ColoredGraphDisplay } from "../components";
+import { ColoredGraph, ColoredGraphDisplay } from "../components";
 import { Node, Edge, Options } from "vis-network/standalone";
 
 type i = [number, number];
 type a = null | 1 | 2;
 type b = [number, number];
 
+interface State {
+	k: number;
+	board: ColoredGraph<i, a, b>;
+}
+
 const size = 100;
 const symbolSize = size * 0.9;
 const thickness = 15;
 
-export class TicTacToeDisplay extends ColoredGraphDisplay<i, a, b> {
+export class TicTacToeAlternativeDisplay extends ColoredGraphDisplay<i, a, b> {
 	private ctxRender(a: a, { ctx, x, y }: { ctx: CanvasRenderingContext2D, x: number, y: number }): any {
 		return {
 			drawNode() {
@@ -39,6 +44,10 @@ export class TicTacToeDisplay extends ColoredGraphDisplay<i, a, b> {
 			},
 			nodeDimensions: { width: size, height: size },
 		};
+	}
+
+	protected updateState(s: State): void {
+		super.updateState(s.board);
 	}
 
 	protected networkOptions(): Options {
