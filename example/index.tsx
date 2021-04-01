@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { MultipleGames, NotificationArea } from "../components";
 import { HexDisplay } from "./HexDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
+import "./index.scss";
 import "../src";
 
 ReactDOM.render(

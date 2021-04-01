@@ -1,5 +1,6 @@
 import { ColoredGraph, ColoredGraphDisplay } from "../components";
 import { Node, Edge, Options } from "vis-network/standalone";
+import "./HexDisplay.scss";
 
 type i = [number, number];
 type a = null | 1 | 2;

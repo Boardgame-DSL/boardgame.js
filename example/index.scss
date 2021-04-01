@@ -1,0 +1,110 @@
+html, body {
+	margin: 0px;
+	overflow: hidden;
+}
+
+* {
+	outline: none !important;
+}
+
+.selector {
+	display: inline-block;
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+
+	p {
+		font-size: 2em;
+		text-align: center;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0px;
+		text-align: center;
+		font-size: 1.25em;
+
+		li {
+			margin-bottom: 0.5em;
+
+			a {
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+.controls {
+	display: block;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	padding: 5px;
+	background-color: white;
+}
+
+.game-over-status {
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+
+	[class|="victor"] {
+		text-shadow: 1px 1px 0px white, 1px -1px 0px white, -1px 1px 0px white, -1px -1px 0px white;
+		font-size: 4em;
+		opacity: 0;
+		animation: remove 5s linear;
+
+		@keyframes remove {
+			5% { opacity: 1; }
+			95% { opacity: 1; }
+			100% { opacity: 0; }
+		}
+	}
+
+	.victor-1 {
+		color: blue;
+	}
+
+	.victor-2 {
+		color: red;
+	}
+}
+
+.graph-container {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	box-sizing: border-box;
+	z-index: -1;
+}
+
+.notification-area {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	bottom: 25px;
+	pointer-events: none;
+
+	.notification {
+		border: 2px solid red;
+		border-radius: 2px;
+		padding: 10px;
+		background-color: white;
+		margin-top: 5px;
+
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+	}
+}
