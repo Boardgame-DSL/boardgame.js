@@ -23,7 +23,7 @@ export class GameOverStatus extends Component<{}, State> {
 		window.boardgame.addEventListener("state", this.onState);
 	}
 
-	private onGameOver(victor: null | 1 | 2): void {
+	private onGameOver(victor: null | 1 | 2, info: any): void {
 		this.setState({
 			isGameOver: true,
 			victor,
