@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { MultipleGames, NotificationArea } from "../components";
 import { TicTacToeDisplay } from "./TicTacToeDisplay";
 import { ArithmeticProgressionGameDisplay } from "./ArithmeticProgressionGameDisplay";
+import { ShannonSwitchingGameDisplay } from "./ShannonSwitchingGameDisplay";
 import { HexDisplay } from "./HexDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
 import "./index.scss";
@@ -14,6 +15,7 @@ ReactDOM.render(
 			games={{
 				"TicTacToe": <TicTacToeDisplay/>,
 				"Arithmetic Progression Game": <ArithmeticProgressionGameDisplay/>,
+				"Shannon Switching Game": <ShannonSwitchingGameDisplay/>,
 				"Hex": <HexDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
 			}}
