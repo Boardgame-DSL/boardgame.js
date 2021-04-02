@@ -7,6 +7,7 @@ import { ShannonSwitchingGameDisplay } from "./ShannonSwitchingGameDisplay";
 import { GaleDisplay } from "./GaleDisplay";
 import { HexDisplay } from "./HexDisplay";
 import { HavannahDisplay } from "./HavannahDisplay";
+import { YavalathDisplay } from "./YavalathDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
 import "./index.scss";
 import "../src";
@@ -21,6 +22,7 @@ ReactDOM.render(
 				"Gale": <GaleDisplay/>,
 				"Hex": <HexDisplay/>,
 				"Havannah": <HavannahDisplay/>,
+				"Yavalath": <YavalathDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
 			}}
 		/>
