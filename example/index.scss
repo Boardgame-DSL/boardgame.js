@@ -8,11 +8,14 @@ html, body {
 }
 
 .selector {
+	max-height: 100vh;
 	display: inline-block;
 	position: fixed;
 	top: 50vh;
-	left: 50vw;
-	transform: translate(-50%, -50%);
+	left: 0px;
+	right: 0px;
+	transform: translate(0px, -50%);
+	overflow-y: auto;
 
 	p {
 		font-size: 2em;
