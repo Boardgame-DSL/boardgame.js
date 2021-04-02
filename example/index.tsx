@@ -8,6 +8,7 @@ import { GaleDisplay } from "./GaleDisplay";
 import { HexDisplay } from "./HexDisplay";
 import { HavannahDisplay } from "./HavannahDisplay";
 import { YavalathDisplay } from "./YavalathDisplay";
+import { CrossDisplay } from "./CrossDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
 import "./index.scss";
 import "../src";
@@ -23,6 +24,7 @@ ReactDOM.render(
 				"Hex": <HexDisplay/>,
 				"Havannah": <HavannahDisplay/>,
 				"Yavalath": <YavalathDisplay/>,
+				"Cross": <CrossDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
 			}}
 		/>
