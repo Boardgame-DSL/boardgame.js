@@ -6,6 +6,7 @@ import { ArithmeticProgressionGameDisplay } from "./ArithmeticProgressionGameDis
 import { ShannonSwitchingGameDisplay } from "./ShannonSwitchingGameDisplay";
 import { GaleDisplay } from "./GaleDisplay";
 import { HexDisplay } from "./HexDisplay";
+import { HavannahDisplay } from "./HavannahDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
 import "./index.scss";
 import "../src";
@@ -19,6 +20,7 @@ ReactDOM.render(
 				"Shannon Switching Game": <ShannonSwitchingGameDisplay/>,
 				"Gale": <GaleDisplay/>,
 				"Hex": <HexDisplay/>,
+				"Havannah": <HavannahDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
 			}}
 		/>
