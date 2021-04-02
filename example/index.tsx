@@ -10,6 +10,7 @@ import { HavannahDisplay } from "./HavannahDisplay";
 import { YavalathDisplay } from "./YavalathDisplay";
 import { CrossDisplay } from "./CrossDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
+import { ConnectFourDisplay } from "./ConnectFourDisplay";
 import "./index.scss";
 import "../src";
 
@@ -27,6 +28,7 @@ ReactDOM.render(
 				"Cross": <CrossDisplay/>,
 				"Hex (Alternative Version)": <HexDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
+				"Connect Four": <ConnectFourDisplay/>,
 			}}
 		/>
 		<NotificationArea/>
