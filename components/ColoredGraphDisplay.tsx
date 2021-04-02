@@ -135,6 +135,7 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 			});
 			isFirst = false;
 		}
+		this.highlights = new Array();
 
 		const edges = new Array<Edge>();
 		for (const [i, [a, neighbours]] of state) {
