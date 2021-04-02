@@ -25,6 +25,7 @@ ReactDOM.render(
 				"Havannah": <HavannahDisplay/>,
 				"Yavalath": <YavalathDisplay/>,
 				"Cross": <CrossDisplay/>,
+				"Hex (Alternative Version)": <HexDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
 			}}
 		/>
