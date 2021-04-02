@@ -11,6 +11,7 @@ import { YavalathDisplay } from "./YavalathDisplay";
 import { CrossDisplay } from "./CrossDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
 import { ConnectFourDisplay } from "./ConnectFourDisplay";
+import { ShannonSwitchingGameCGDisplay } from "./ShannonSwitchingGameCGDisplay";
 import "./index.scss";
 import "../src";
 
@@ -29,6 +30,7 @@ ReactDOM.render(
 				"Hex (Alternative Version)": <HexDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
 				"Connect Four": <ConnectFourDisplay/>,
+				"Shannon Switching Game (On a ColoredGraph)": <ShannonSwitchingGameCGDisplay/>,
 			}}
 		/>
 		<NotificationArea/>
