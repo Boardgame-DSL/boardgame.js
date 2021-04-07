@@ -1,11 +1,12 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
 		"alwaysStrict": true,
+		"declaration": true,
+		"declarationDir": "./dist/",
 		"esModuleInterop": true,
 		"jsx": "react",
-		"module": "CommonJS",
 		"moduleResolution": "node",
-		"outDir": "dist",
 		"target": "ES2017"
 	}
 }
