@@ -3,6 +3,7 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"declaration": false,
+		"declarationDir": null,
 		"rootDirs": [ "./example/" ]
 	},
 	"include": [ "./src/**/*", "./components-src/**/*", "./example/**/*" ]
