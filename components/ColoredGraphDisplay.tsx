@@ -108,7 +108,6 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 	protected onEdgeClicked(i: i, a: a, ni: i, b: b): void { }
 
 	private buildGraph(state: ColoredGraph<i, a, b>): Data {
-		let isFirst = true;
 		const nodes = new Array<Node>();
 		for (const [i, [a, ibs]] of state) {
 			nodes.push({
@@ -118,12 +117,7 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 					node: this.onNodeClicked.bind(this, i, a, ibs),
 					label: false,
 				},
-				...(isFirst ? {
-					x: 0,
-					y: 0,
-				} : {})
 			});
-			isFirst = false;
 		}
 
 		const edges = new Array<Edge>();

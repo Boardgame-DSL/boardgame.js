@@ -23,8 +23,8 @@ export class HavannahDisplay extends ColoredGraphDisplay<i, a, b> {
 			shape: "hexagon",
 			size: 50,
 			color: a === 1 ? "#0000ff" : a === 2 ? "#ff0000" : "#777777",
-			x: (x + 7) * 80,
-			y: y * 95 + (x + 7) * 45,
+			x: x * 80,
+			y: y * 95 + x * 45,
 		};
 	}
 	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
