@@ -8,6 +8,7 @@ import { GaleDisplay } from "./GaleDisplay";
 import { HexDisplay } from "./HexDisplay";
 import { HavannahDisplay } from "./HavannahDisplay";
 import { YavalathDisplay } from "./YavalathDisplay";
+import { YDisplay } from "./YDisplay";
 import { CrossDisplay } from "./CrossDisplay";
 import { TicTacToeAlternativeDisplay } from "./TicTacToeAlternativeDisplay";
 import { ConnectFourDisplay } from "./ConnectFourDisplay";
@@ -26,6 +27,7 @@ ReactDOM.render(
 				"Hex": <HexDisplay/>,
 				"Havannah": <HavannahDisplay/>,
 				"Yavalath": <YavalathDisplay/>,
+				"Y": <YDisplay/>,
 				"Cross": <CrossDisplay/>,
 				"Hex (Alternative Version)": <HexDisplay/>,
 				"TicTacToe (Alternative Version)": <TicTacToeAlternativeDisplay/>,
