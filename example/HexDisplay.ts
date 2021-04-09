@@ -12,11 +12,11 @@ export class HexDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
-	protected constructNode(i: i, a: a, ibs: Array<[i, b]>): Node {
+	protected constructNode(i: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node {
 		return {
 			shape: "hexagon",
-			size: 50,
-			color: a === 1 ? "#0000ff" : a === 2 ? "#ff0000" : "#777777",
+			size: highlighted ? 54 : 48,
+			color: (a === 1 ? "#0000ff" : a === 2 ? "#ff0000" : "#777777"),
 			x: i[0] * 80,
 			y: i[1] * 95 + i[0] * 45,
 		};
