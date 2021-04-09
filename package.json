@@ -1,7 +1,13 @@
 {
-	"name": "boardgame",
-	"version": "0.0.1",
+	"name": "@boardgame-dsl/boardgame",
+	"version": "0.1.1",
 	"license": "MIT",
+	"description": "The frontend \"glue\" for Haskell boardgames",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Boardgame-DSL/boardgame.js.git"
+	},
+	"homepage": "https://github.com/Boardgame-DSL",
 	"main": "index.js",
 	"scripts": {
 		"start": "webpack-cli serve --config=example.config.js",
