@@ -4,7 +4,7 @@
 
 The library is almost required when using boardgame WASM.
 
-It is located in `./src`, `webpack.config.js`, run `npm run build-lib` to build.
+It is located in `./src`, `lib.config.js`, run `npm run build-lib` to build.
 Output is placed in `./dist/index.js`.
 
 ## UI Components
