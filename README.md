@@ -42,8 +42,9 @@ It is located in `./components`, `components.config.js`, run
 
 ## Example
 
-An example project is available. To use it, place `boardgame.js` and
-`boardgame.wasm` (output of the Haskell [boardgame](https://github.com/Boardgame-DSL/boardgame)
+An example project is available. To build it run `npm run build-example`.
+To use it, place `boardgame.js` and `boardgame.wasm`
+(output of the Haskell [boardgame](https://github.com/Boardgame-DSL/boardgame)
 project) in `./dist-example`, and then run `npm start`. This will start a dev
 server on [`localhost:9090`](http://localhost:9090/).
 
