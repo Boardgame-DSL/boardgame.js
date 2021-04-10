@@ -1,13 +1,31 @@
 {
-	"name": "boardgame",
-	"version": "0.0.1",
+	"name": "@boardgame-dsl/boardgame",
+	"version": "0.1.1",
 	"license": "MIT",
+	"description": "The frontend \"glue\" for Haskell boardgames",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Boardgame-DSL/boardgame.js.git"
+	},
+	"homepage": "https://github.com/Boardgame-DSL",
+	"main": "index.js",
 	"scripts": {
-		"start": "webpack-cli serve --config=./example.config.js",
-		"build": "npm run build-lib && npm run build-components && npm run build-example",
-		"build-lib": "webpack-cli --mode=production --config=./webpack.config.js",
-		"build-components": "webpack-cli --mode=production --config=./components.config.js",
-		"build-example": "webpack-cli --mode=production --config=./example.config.js"
+		"start": "webpack-cli serve --config=example.config.js",
+		"build": "npm run build-lib && npm run build-components",
+		"build-lib": "webpack-cli --mode=production --config=lib.config.js",
+		"build-components": "webpack-cli --mode=production --config=components.config.js",
+		"build-example": "webpack-cli --mode=production --config=example.config.js",
+		"prepack": "npm run build && node prepack.js",
+		"postpack": "node postpack.js"
+	},
+	"files": [
+		"index.js",
+		"index.d.ts",
+		"components/**/*.js",
+		"components/**/*.d.ts"
+	],
+	"dependencies": {
+		"vis-network": "^9.0.2"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.2",
@@ -21,9 +39,11 @@
 		"style-loader": "^2.0.0",
 		"ts-loader": "^8.0.17",
 		"typescript": "^4.2.2",
-		"vis-network": "^9.0.2",
 		"webpack": "^5.24.2",
 		"webpack-cli": "^4.5.0",
 		"webpack-dev-server": "^3.11.2"
+	},
+	"peerDependencies": {
+		"react": "^17.0.1"
 	}
 }

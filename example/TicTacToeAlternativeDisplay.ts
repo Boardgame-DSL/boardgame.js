@@ -56,7 +56,7 @@ export class TicTacToeAlternativeDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
-	protected constructNode(i: i, a: a, ibs: Array<[i, b]>): Node & { ctxRenderer: any } {
+	protected constructNode(i: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node & { ctxRenderer: any } {
 		return {
 			ctxRenderer: this.ctxRender.bind(this, a),
 			shape: "custom",

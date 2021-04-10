@@ -8,7 +8,14 @@ module.exports = {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				use: "ts-loader"
+				use: [
+					{
+						loader: "ts-loader",
+						options: {
+							configFile: path.resolve(__dirname, "./example.tsconfig.json"),
+						},
+					},
+				],
 			},
 			{
 				test: /\.s?css$/,
@@ -31,11 +38,11 @@ module.exports = {
 		}),
 	],
 	output: {
-		filename: "example.js",
-		path: path.resolve(__dirname, "dist")
+		filename: "index.js",
+		path: path.resolve(__dirname, "./dist-example/")
 	},
 	devServer: {
-		contentBase: path.resolve(__dirname, "dist"),
+		contentBase: path.resolve(__dirname, "./dist-example/"),
 		port: 9090,
 		host: "0.0.0.0"
 	}

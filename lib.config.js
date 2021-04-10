@@ -7,7 +7,14 @@ module.exports = {
 		rules: [
 			{
 				test: /\.ts$/,
-				use: "ts-loader"
+				use: [
+					{
+						loader: "ts-loader",
+						options: {
+							configFile: path.resolve(__dirname, "./lib.tsconfig.json"),
+						},
+					},
+				],
 			},
 		]
 	},

@@ -18,7 +18,7 @@ export class CrossDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
-	protected constructNode([x, y]: i, a: a, ibs: Array<[i, b]>): Node {
+	protected constructNode([x, y]: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node {
 		return {
 			shape: "hexagon",
 			size: 50,

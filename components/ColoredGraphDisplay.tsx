@@ -47,6 +47,7 @@ export const ColoredGraph = {
 export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 	private readonly divRef: RefObject<HTMLDivElement>;
 	private network: Network;
+	private highlights: Array<i>;
 
 	protected graph: ColoredGraph<i, a, b>;
 
@@ -55,11 +56,18 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 
 		this.divRef = createRef();
 
+		this.onGameOver = this.onGameOver.bind(this);
 		this.renderGraph = this.renderGraph.bind(this);
+	}
+
+	private onGameOver(victor: null | 1 | 2, info: Array<any>): void {
+		this.highlights = info;
+		this.renderGraph(this.graph);
 	}
 
 	public componentDidMount(): void {
 		window.boardgame.addEventListener("state", this.renderGraph);
+		window.boardgame.addEventListener("gameOver", this.onGameOver);
 
 		this.network = new Network(
 			this.divRef.current,
@@ -79,10 +87,12 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 				},
 			}
 		);
+		this.highlights = new Array();
 	}
 
 	public componentWillUnmount(): void {
 		window.boardgame.removeEventListener("state", this.renderGraph);
+		window.boardgame.removeEventListener("gameOver", this.onGameOver);
 	}
 
 	protected networkOptions(): Options {
@@ -93,7 +103,7 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 		this.graph = s as ColoredGraph<i, a, b>;
 	}
 
-	protected constructNode(i: i, a: a, ibs: Array<[i, b]>): Node {
+	protected constructNode(i: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node {
 		return {
 			label: JSON.stringify(a),
 		};
@@ -111,7 +121,7 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 		const nodes = new Array<Node>();
 		for (const [i, [a, ibs]] of state) {
 			nodes.push({
-				...this.constructNode(i, a, ibs),
+				...this.constructNode(i, a, this.highlights.some(x => JSON.stringify(x) === JSON.stringify(i)), ibs),
 				id: JSON.stringify(i),
 				chosen: {
 					node: this.onNodeClicked.bind(this, i, a, ibs),
@@ -119,6 +129,7 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 				},
 			});
 		}
+		this.highlights = new Array();
 
 		const edges = new Array<Edge>();
 		for (const [i, [a, neighbours]] of state) {

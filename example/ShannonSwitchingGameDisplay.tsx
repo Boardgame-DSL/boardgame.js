@@ -55,7 +55,7 @@ export class ShannonSwitchingGameDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
-	protected constructNode(i: i, a: a, ibs: Array<[i, b]>): Node {
+	protected constructNode(i: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node {
 		return {
 			borderWidth: width,
 			color: {

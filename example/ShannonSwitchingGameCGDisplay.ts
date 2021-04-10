@@ -28,7 +28,7 @@ export class ShannonSwitchingGameCGDisplay extends ColoredGraphDisplay<i, a, b> 
 		this.graph = ColoredGraph.mapToKeyValueNumber(s.graph);
 	}
 
-	protected constructNode(i: i, a: a, bis: Array<[i, b]>): Node {
+	protected constructNode(i: i, a: a, highlighted: boolean, bis: Array<[i, b]>): Node {
 		return {
 			borderWidth: width,
 			color: {
