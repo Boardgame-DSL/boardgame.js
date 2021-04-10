@@ -31,7 +31,7 @@ export class HexDisplay extends ColoredGraphDisplay<i, a, b> {
 			y: i[1] * 95 + i[0] * 45,
 		};
 	}
-	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
+	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {
 		return { };
 	}
 

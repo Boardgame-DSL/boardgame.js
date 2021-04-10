@@ -11,11 +11,12 @@ interface State {
 }
 
 const size = 100;
-const margin = 10;
+const circleSize = size * 0.875;
+const highlightedCircleSize = size * 0.925;
 const lineWidth = 2;
 
 export class ConnectFourDisplay extends ColoredGraphDisplay<i, a, b> {
-	private ctxRender(a: a, { ctx, x, y }: { ctx: CanvasRenderingContext2D, x: number, y: number }): any {
+	private ctxRender(a: a, highlighted: boolean, { ctx, x, y }: { ctx: CanvasRenderingContext2D, x: number, y: number }): any {
 		return {
 			drawNode() {
 				ctx.fillStyle = "#aaaaaa";
@@ -33,7 +34,8 @@ export class ConnectFourDisplay extends ColoredGraphDisplay<i, a, b> {
 					ctx.fillStyle = "#ffffff";
 				}
 				ctx.beginPath();
-				ctx.ellipse(x, y, (size - margin) / 2, (size - margin) / 2, 0, 0, Math.PI * 2);
+				const radius = (highlighted ? highlightedCircleSize : circleSize) / 2;
+				ctx.ellipse(x, y, radius, radius, 0, 0, Math.PI * 2);
 				ctx.fill();
 				ctx.closePath();
 			},
@@ -53,14 +55,14 @@ export class ConnectFourDisplay extends ColoredGraphDisplay<i, a, b> {
 
 	protected constructNode([x, y]: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node & { ctxRenderer: any } {
 		return {
-			ctxRenderer: this.ctxRender.bind(this, a),
+			ctxRenderer: this.ctxRender.bind(this, a, highlighted),
 			shape: "custom",
 			size: size / 2,
 			x: y * size,
 			y: -x * size,
 		};
 	}
-	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
+	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {
 		return {
 			hidden: true,
 		};

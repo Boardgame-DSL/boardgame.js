@@ -9,4 +9,8 @@
 		font-size: 4em;
 		cursor: pointer;
 	}
+
+	table.gameOver tbody tr td:not(.highlighted) {
+		filter: grayscale(1);
+	}
 }

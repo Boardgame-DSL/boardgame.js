@@ -21,13 +21,13 @@ export class CrossDisplay extends ColoredGraphDisplay<i, a, b> {
 	protected constructNode([x, y]: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node {
 		return {
 			shape: "hexagon",
-			size: 50,
+			size: highlighted ? 54 : 48,
 			color: a === 1 ? "#0000ff" : a === 2 ? "#ff0000" : "#777777",
 			x: x * 80,
 			y: y * 95 + x * 45,
 		};
 	}
-	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
+	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {
 		return { };
 	}
 

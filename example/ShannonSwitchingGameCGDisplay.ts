@@ -15,6 +15,7 @@ interface SSG {
 
 const nodeSize = 30;
 const width = 10;
+const highlightedWidth = 12.5;
 const cutGap = 20;
 const cutWidth = 5;
 
@@ -46,12 +47,12 @@ export class ShannonSwitchingGameCGDisplay extends ColoredGraphDisplay<i, a, b> 
 		};
 	}
 
-	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
+	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {
 		return {
 			color: b === 1 ? "#0000ff" : b === 2 ? "#ff0000" : "#000000",
 			dashes: b !== 2 ? false : [width, cutGap],
 			hidden: i > ni,
-			width: b !== 2 ? width : cutWidth,
+			width: highlighted ? highlightedWidth : b !== 2 ? width : cutWidth,
 		};
 	}
 

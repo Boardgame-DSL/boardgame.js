@@ -13,6 +13,7 @@ interface State {
 const size = 150;
 const nodeSize = 30;
 const width = 10;
+const highlightedWidth = 12.5;
 
 export class ShannonSwitchingGameDisplay extends ColoredGraphDisplay<i, a, b> {
 	private n: number = 0;
@@ -75,10 +76,10 @@ export class ShannonSwitchingGameDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
-	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
+	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {
 		return {
 			color: b === 1 ? "#0000ff" : b === 2 ? "#ff0000" : "#000000",
-			width: width,
+			width: highlighted ? highlightedWidth : width,
 		};
 	}
 

@@ -14,6 +14,7 @@ const size = 100;
 const nodeSize = 30;
 const width = size;
 const selectedWidth = 10;
+const highlightedWidth = 12.5;
 
 export class GaleDisplay extends ColoredGraphDisplay<i, a, b> {
 	protected updateState(s: Gale): void {
@@ -120,11 +121,11 @@ export class GaleDisplay extends ColoredGraphDisplay<i, a, b> {
 			y: y * size,
 		};
 	}
-	protected constructEdge([x, y]: i, a: a, [nX, nY]: i, [[cX, cY], b]: b): Edge {
+	protected constructEdge([x, y]: i, a: a, highlighted: boolean, [nX, nY]: i, [[cX, cY], b]: b): Edge {
 		return {
 			color: b === 1 ? "#0000ff" : b === 2 ? "#ff0000" : "rgba(0, 0, 0, 0.0)",
 			hidden: !(b == null || (y % 2 === 0 ? b === 1 : b === 2)),
-			width: b == null ? width : selectedWidth,
+			width: b == null ? width : highlighted ? highlightedWidth : selectedWidth,
 		};
 	}
 
