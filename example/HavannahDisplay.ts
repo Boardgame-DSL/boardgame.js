@@ -1,19 +1,15 @@
 import { ColoredGraph, ColoredGraphDisplay } from "../components";
 import { Node, Edge, Options } from "vis-network/standalone";
-import "./HexDisplay.scss";
 
 type i = [number, number];
 type a = null | 1 | 2;
-type b = [number, number];
+type b = string;
 
-interface State {
-	n: number;
-	board: ColoredGraph<i, a, b>;
-}
+type Havannah = ColoredGraph<i, a, b>;
 
-export class HexDisplay extends ColoredGraphDisplay<i, a, b> {
-	protected updateState(s: State): void {
-		super.updateState(s.board);
+export class HavannahDisplay extends ColoredGraphDisplay<i, a, b> {
+	protected updateState(s: Havannah): void {
+		super.updateState(s);
 	}
 
 	protected networkOptions(): Options {
@@ -22,13 +18,13 @@ export class HexDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
-	protected constructNode(i: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node {
+	protected constructNode([x, y]: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node {
 		return {
 			shape: "hexagon",
 			size: highlighted ? 54 : 48,
-			color: (a === 1 ? "#0000ff" : a === 2 ? "#ff0000" : "#777777"),
-			x: i[0] * 80,
-			y: i[1] * 95 + i[0] * 45,
+			color: a === 1 ? "#0000ff" : a === 2 ? "#ff0000" : "#777777",
+			x: x * 80,
+			y: y * 95 + x * 45,
 		};
 	}
 	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {

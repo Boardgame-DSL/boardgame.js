@@ -47,7 +47,7 @@ export const ColoredGraph = {
 export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 	private readonly divRef: RefObject<HTMLDivElement>;
 	private network: Network;
-	private highlights: Array<i>;
+	private highlights: Set<string>;
 
 	protected graph: ColoredGraph<i, a, b>;
 
@@ -57,16 +57,16 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 		this.divRef = createRef();
 
 		this.onGameOver = this.onGameOver.bind(this);
-		this.renderGraph = this.renderGraph.bind(this);
+		this.updateGraph = this.updateGraph.bind(this);
 	}
 
 	private onGameOver(victor: null | 1 | 2, info: Array<any>): void {
-		this.highlights = info;
-		this.renderGraph(this.graph);
+		this.highlights = new Set<string>(info.map(c => JSON.stringify(c)));
+		this.renderGraph();
 	}
 
 	public componentDidMount(): void {
-		window.boardgame.addEventListener("state", this.renderGraph);
+		window.boardgame.addEventListener("state", this.updateGraph);
 		window.boardgame.addEventListener("gameOver", this.onGameOver);
 
 		this.network = new Network(
@@ -87,11 +87,11 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 				},
 			}
 		);
-		this.highlights = new Array();
+		this.highlights = new Set<string>();
 	}
 
 	public componentWillUnmount(): void {
-		window.boardgame.removeEventListener("state", this.renderGraph);
+		window.boardgame.removeEventListener("state", this.updateGraph);
 		window.boardgame.removeEventListener("gameOver", this.onGameOver);
 	}
 
@@ -108,7 +108,7 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 			label: JSON.stringify(a),
 		};
 	}
-	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
+	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {
 		return {
 			label: JSON.stringify(b),
 		};
@@ -118,30 +118,26 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 	protected onEdgeClicked(i: i, a: a, ni: i, b: b): void { }
 
 	private buildGraph(state: ColoredGraph<i, a, b>): Data {
-		let isFirst = true;
 		const nodes = new Array<Node>();
 		for (const [i, [a, ibs]] of state) {
+			const iStructure = JSON.stringify(i);
 			nodes.push({
-				...this.constructNode(i, a, this.highlights.some(x => JSON.stringify(x) === JSON.stringify(i)), ibs),
-				id: JSON.stringify(i),
+				...this.constructNode(i, a, this.highlights.has(iStructure), ibs),
+				id: iStructure,
 				chosen: {
 					node: this.onNodeClicked.bind(this, i, a, ibs),
 					label: false,
 				},
-				...(isFirst ? {
-					x: 0,
-					y: 0,
-				} : {})
 			});
-			isFirst = false;
 		}
-		this.highlights = new Array();
+		this.highlights.clear();
 
 		const edges = new Array<Edge>();
 		for (const [i, [a, neighbours]] of state) {
 			for (const [ni, b] of neighbours) {
+				const bStructure = JSON.stringify(b);
 				edges.push({
-					...this.constructEdge(i, a, ni, b),
+					...this.constructEdge(i, a, this.highlights.has(bStructure), ni, b),
 					from: JSON.stringify(i),
 					to: JSON.stringify(ni),
 					chosen: {
@@ -157,8 +153,11 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 			edges,
 		};
 	}
-	private renderGraph(s: any): void {
+	private updateGraph(s: any): void {
 		this.updateState(s);
+		this.renderGraph();
+	}
+	private renderGraph(): void {
 		const graph = this.buildGraph(this.graph);
 		this.network.setData(graph);
 	}

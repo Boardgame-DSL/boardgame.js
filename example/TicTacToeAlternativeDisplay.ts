@@ -1,20 +1,27 @@
-import { ColoredGraphDisplay } from "../components";
+import { ColoredGraph, ColoredGraphDisplay } from "../components";
 import { Node, Edge, Options } from "vis-network/standalone";
 
 type i = [number, number];
 type a = null | 1 | 2;
 type b = [number, number];
 
+interface State {
+	k: number;
+	board: ColoredGraph<i, a, b>;
+}
+
 const size = 100;
 const symbolSize = size * 0.9;
-const thickness = 15;
+const normalThickness = 15;
+const highlightedThickness = 20;
 
-export class TicTacToeDisplay extends ColoredGraphDisplay<i, a, b> {
-	private ctxRender(a: a, { ctx, x, y }: { ctx: CanvasRenderingContext2D, x: number, y: number }): any {
+export class TicTacToeAlternativeDisplay extends ColoredGraphDisplay<i, a, b> {
+	private ctxRender(a: a, highlighted: boolean, { ctx, x, y }: { ctx: CanvasRenderingContext2D, x: number, y: number }): any {
 		return {
 			drawNode() {
 				ctx.fillStyle = "#aaaaaa";
 				ctx.fillRect(x - size / 2, y - size / 2, size, size);
+				const thickness = highlighted ? highlightedThickness : normalThickness;
 				if (a === 1) {
 					ctx.strokeStyle = "#0000ff";
 					ctx.lineWidth = thickness;
@@ -41,6 +48,10 @@ export class TicTacToeDisplay extends ColoredGraphDisplay<i, a, b> {
 		};
 	}
 
+	protected updateState(s: State): void {
+		super.updateState(s.board);
+	}
+
 	protected networkOptions(): Options {
 		return {
 			physics: false,
@@ -49,14 +60,14 @@ export class TicTacToeDisplay extends ColoredGraphDisplay<i, a, b> {
 
 	protected constructNode(i: i, a: a, highlighted: boolean, ibs: Array<[i, b]>): Node & { ctxRenderer: any } {
 		return {
-			ctxRenderer: this.ctxRender.bind(this, a),
+			ctxRenderer: this.ctxRender.bind(this, a, highlighted),
 			shape: "custom",
 			size: size / 2,
 			x: i[0] * size,
 			y: i[1] * size,
 		};
 	}
-	protected constructEdge(i: i, a: a, ni: i, b: b): Edge {
+	protected constructEdge(i: i, a: a, highlighted: boolean, ni: i, b: b): Edge {
 		return {
 			hidden: true,
 		};

@@ -4,6 +4,7 @@
 		"alwaysStrict": true,
 		"declaration": true,
 		"declarationDir": "./dist/",
+		"downlevelIteration": true,
 		"esModuleInterop": true,
 		"jsx": "react",
 		"moduleResolution": "node",
