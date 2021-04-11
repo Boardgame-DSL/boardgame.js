@@ -47,9 +47,9 @@ export const ColoredGraph = {
 export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 	private readonly divRef: RefObject<HTMLDivElement>;
 	private network: Network;
-	private highlights: Set<string>;
 
 	protected graph: ColoredGraph<i, a, b>;
+	protected highlights: Set<string>;
 
 	public constructor(props: {}) {
 		super(props);
@@ -60,8 +60,12 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 		this.updateGraph = this.updateGraph.bind(this);
 	}
 
-	private onGameOver(victor: null | 1 | 2, info: Array<any>): void {
+	protected updateHighlights(info: Array<any>): void {
 		this.highlights = new Set<string>(info.map(c => JSON.stringify(c)));
+	}
+
+	private onGameOver(victor: null | 1 | 2, info: Array<any>): void {
+		this.updateHighlights(info);
 		this.renderGraph();
 	}
 
@@ -130,12 +134,11 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 				},
 			});
 		}
-		this.highlights.clear();
 
 		const edges = new Array<Edge>();
 		for (const [i, [a, neighbours]] of state) {
 			for (const [ni, b] of neighbours) {
-				const bStructure = JSON.stringify(b);
+				const bStructure = JSON.stringify([i, ni]);
 				edges.push({
 					...this.constructEdge(i, a, this.highlights.has(bStructure), ni, b),
 					from: JSON.stringify(i),
@@ -147,6 +150,8 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 				});
 			}
 		}
+
+		this.highlights.clear();
 
 		return {
 			nodes,
