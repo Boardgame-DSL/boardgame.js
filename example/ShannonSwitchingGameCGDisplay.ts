@@ -23,6 +23,10 @@ export class ShannonSwitchingGameCGDisplay extends ColoredGraphDisplay<i, a, b> 
 	private start: i;
 	private goal: i;
 
+	protected updateHighlights(info: Array<any>): void {
+		this.highlights = new Set<string>(info.map(([f, t]) => JSON.stringify(f < t ? [f, t] : [t, f])));
+	}
+
 	protected updateState(s: SSG): void {
 		this.start = s.start;
 		this.goal = s.goal;
