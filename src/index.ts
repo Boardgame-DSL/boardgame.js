@@ -5,7 +5,7 @@
  *
  * It is almost required to run Web Assembly boardgames. But you can implement
  * it yourself if you do not want to depend on this library.
- * @module
+ * @module boardgame
  */
 
 /**

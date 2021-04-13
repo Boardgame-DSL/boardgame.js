@@ -17,6 +17,7 @@
 		],
 		"excludePrivate": true,
 		"excludeExternals": true,
+		"name": "@boardgame-dsl",
 		"out": "./docs/",
 		"readme": "none"
 	}

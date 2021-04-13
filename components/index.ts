@@ -10,7 +10,7 @@
  * a `ColoredGraph`. This component can display such games in an almost
  * playable state without any configuration, and with configuration it can even
  * look pretty.
- * @module
+ * @module boardgame/components
  */
 export { TurnDisplay } from "./TurnDisplay";
 export { StartButton } from "./StartButton";
