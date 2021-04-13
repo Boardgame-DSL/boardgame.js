@@ -1,9 +1,19 @@
 import React from "react";
 import { Component, ReactNode } from "react";
 
-export interface Properties {
-	gameName?: string;
-	isRestart?: boolean;
+export namespace StartButton {
+	export interface Properties {
+		/**
+		 * The name of the game that this button starts. The default value is
+		 * `default`.
+		 */
+		gameName?: string;
+		/**
+		 * Should this button start in the "restart" state (`true`), or the
+		 * "start" state (`false`).
+		 */
+		isRestart?: boolean;
+	}
 }
 
 interface State {
@@ -11,12 +21,18 @@ interface State {
 	isRestart: boolean;
 }
 
-export class StartButton extends Component<Properties, State> {
+/**
+ * This React components renders a single `button` that when clicked starts the
+ * game specified by its {@linkcode StartButton.Properties.gameName | gameName}
+ * property.
+ */
+export class StartButton extends Component<StartButton.Properties, State> {
 	private get gameName(): string {
 		return this.props.gameName ?? "default";
 	}
 
-	public constructor(props: Properties) {
+	/** @ignore */
+	public constructor(props: StartButton.Properties) {
 		super(props);
 
 		this.state = {
@@ -27,6 +43,7 @@ export class StartButton extends Component<Properties, State> {
 		this.onGameOver = this.onGameOver.bind(this);
 	}
 
+	/** @ignore */
 	public componentDidMount(): void {
 		this.waitForInitialized();
 		window.boardgame.addEventListener("gameOver", this.onGameOver);
@@ -44,6 +61,7 @@ export class StartButton extends Component<Properties, State> {
 		});
 	}
 
+	/** @ignore */
 	public componentWillUnmount(): void {
 		window.boardgame.removeEventListener("gameOver", this.onGameOver);
 	}
@@ -57,6 +75,7 @@ export class StartButton extends Component<Properties, State> {
 		}
 	}
 
+	/** @ignore */
 	public render(): ReactNode {
 		return (
 			<button

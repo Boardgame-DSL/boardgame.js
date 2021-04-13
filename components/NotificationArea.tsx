@@ -10,7 +10,16 @@ interface Notification {
 	timeoutId: number;
 }
 
+/**
+ * This React component displays notifications from Haskell. It will display
+ * messages from the "invalidInput" and "invalidMove" events, and from when
+ * Haskell is initialized.
+ *
+ * It renders a `div.notification-area` that will contain one
+ * `div.notification` per message. Each message will remain for 5 seconds.
+ */
 export class NotificationArea extends Component<{}, State> {
+	/** @ignore */
 	public constructor(props: {}) {
 		super(props);
 
@@ -23,6 +32,7 @@ export class NotificationArea extends Component<{}, State> {
 		this.onInitialized = this.onInitialized.bind(this);
 	}
 
+	/** @ignore */
 	public componentDidMount(): void {
 		window.boardgame.addEventListener("invalidInput", this.onInvalidInput);
 		window.boardgame.addEventListener("invalidMove", this.onInvalidMove);
@@ -39,6 +49,10 @@ export class NotificationArea extends Component<{}, State> {
 		this.sendNotification("Game is ready!");
 	}
 
+	/**
+	 * Use this method to display notifications with custom messages.
+	 * @param message The message to display.
+	 */
 	public sendNotification(message: string): void {
 		const notification: Notification = {
 			message,
@@ -53,6 +67,7 @@ export class NotificationArea extends Component<{}, State> {
 		});
 	}
 
+	/** @ignore */
 	public componentWillUnmount(): void {
 		window.boardgame.removeEventListener("invalidInput", this.onInvalidInput);
 		window.boardgame.removeEventListener("invalidMove", this.onInvalidMove);
@@ -61,6 +76,7 @@ export class NotificationArea extends Component<{}, State> {
 		}
 	}
 
+	/** @ignore */
 	public render(): ReactNode {
 		return (
 			<div className="notification-area">
