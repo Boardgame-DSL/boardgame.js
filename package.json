@@ -15,6 +15,7 @@
 		"build-lib": "webpack-cli --mode=production --config=lib.config.js",
 		"build-components": "webpack-cli --mode=production --config=components.config.js",
 		"build-example": "webpack-cli --mode=production --config=example.config.js",
+		"doc": "typedoc",
 		"prepack": "npm run build && node prepack.js",
 		"postpack": "node postpack.js"
 	},
@@ -38,7 +39,10 @@
 		"sass-loader": "^11.0.1",
 		"style-loader": "^2.0.0",
 		"ts-loader": "^8.0.17",
+		"typedoc": "^0.20.35",
 		"typescript": "^4.2.2",
+		"vis-data": "^7.1.2",
+		"vis-util": "^5.0.2",
 		"webpack": "^5.24.2",
 		"webpack-cli": "^4.5.0",
 		"webpack-dev-server": "^3.11.2"
