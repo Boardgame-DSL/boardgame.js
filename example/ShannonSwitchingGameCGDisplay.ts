@@ -53,6 +53,7 @@ export class ShannonSwitchingGameCGDisplay extends ColoredGraphDisplay<i, a, b> 
 			dashes: b !== 2 ? false : [width, cutGap],
 			hidden: i > ni,
 			width: highlighted ? highlightedWidth : b !== 2 ? width : cutWidth,
+			smooth: true
 		};
 	}
 

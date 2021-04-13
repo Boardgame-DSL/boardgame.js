@@ -137,13 +137,14 @@ export class ColoredGraphDisplay<i, a, b> extends Component<{}, {}> {
 			for (const [ni, b] of neighbours) {
 				const bStructure = JSON.stringify(b);
 				edges.push({
-					...this.constructEdge(i, a, this.highlights.has(bStructure), ni, b),
 					from: JSON.stringify(i),
 					to: JSON.stringify(ni),
 					chosen: {
 						edge: this.onEdgeClicked.bind(this, i, a, ni, b),
 						label: false,
-					}
+					},
+					smooth: false,
+					...this.constructEdge(i, a, this.highlights.has(bStructure), ni, b),
 				});
 			}
 		}

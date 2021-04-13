@@ -80,6 +80,7 @@ export class ShannonSwitchingGameDisplay extends ColoredGraphDisplay<i, a, b> {
 		return {
 			color: b === 1 ? "#0000ff" : b === 2 ? "#ff0000" : "#000000",
 			width: highlighted ? highlightedWidth : width,
+			smooth: true
 		};
 	}
 
