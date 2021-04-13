@@ -1,4 +1,14 @@
 /**
+ * This module defines the `window.boardgame` object. This object is used by
+ * the Haskell model to communicate change, and can be used from the JavaScript
+ * runtime to invoke Haskell functions.
+ *
+ * It is almost required to run Web Assembly boardgames. But you can implement
+ * it yourself if you do not want to depend on this library.
+ * @module
+ */
+
+/**
  * A collection of event listeners for the different events.
  */
 const eventListeners = {
