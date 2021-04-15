@@ -5,7 +5,15 @@ interface State {
 	victor: null | 1 | 2;
 }
 
+/**
+ * This React component displays a `div.game-over-status` and reacts to
+ * "gameOver" events from Haskell. When a player wins a `p` is rendered inside
+ * the containing `div`. The `p`-tag will have a class describing who won,
+ * `winner-1`, `winner-2`, or in the case of a draw `winner-null`. When a new
+ * game is started the inside of the containing `div` is cleared.
+ */
 export class GameOverStatus extends Component<{}, State> {
+	/** @ignore */
 	public constructor(props: {}) {
 		super(props);
 
@@ -18,6 +26,7 @@ export class GameOverStatus extends Component<{}, State> {
 		this.onState = this.onState.bind(this);
 	}
 
+	/** @ignore */
 	public componentDidMount(): void {
 		window.boardgame.addEventListener("gameOver", this.onGameOver);
 		window.boardgame.addEventListener("state", this.onState);
@@ -36,11 +45,13 @@ export class GameOverStatus extends Component<{}, State> {
 		});
 	}
 
+	/** @ignore */
 	public componentWillUnmount(): void {
 		window.boardgame.removeEventListener("gameOver", this.onGameOver);
 		window.boardgame.removeEventListener("state", this.onState);
 	}
 
+	/** @ignore */
 	public render(): ReactNode {
 		return (
 			<div className="game-over-status">

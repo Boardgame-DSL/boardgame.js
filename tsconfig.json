@@ -9,5 +9,16 @@
 		"jsx": "react",
 		"moduleResolution": "node",
 		"target": "ES5"
+	},
+	"typedocOptions": {
+		"entryPoints": [
+			"./src/index.ts",
+			"./components/index.ts"
+		],
+		"excludePrivate": true,
+		"excludeExternals": true,
+		"name": "@boardgame-dsl",
+		"out": "./docs/",
+		"readme": "none"
 	}
 }
