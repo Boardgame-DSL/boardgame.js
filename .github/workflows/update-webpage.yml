@@ -1,0 +1,33 @@
+name: Update Webpage
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  typedoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '15.14.0'
+      - name: Update dependencies
+        run: npm ci
+      - name: Build documentation
+        run: npm run doc
+      - name: Update Webpage
+        run: |
+          git clone https://github.com/Boardgame-DSL/Boardgame-DSL.github.io.git
+          cp -r ./docs/ ./Boardgame-DSL.github.io/javascript/
+      - name: Push Update
+        uses: actions-js/push@master
+        with:
+          github_token: ${{secrets.TOKEN}}
+          author_name: 'GitHub Actions Bot'
+          message: |
+            Updating JavaScript documentation
+            Based on commit ${{github.repository}}#${{github.sha}}.
+          branch: 'main'
+          directory: './Boardgame-DSL.github.io'
+          repository: 'Boardgame-DSL/Boardgame-DSL.github.io'
