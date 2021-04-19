@@ -19,7 +19,8 @@ jobs:
       - name: Update Webpage
         run: |
           git clone https://github.com/Boardgame-DSL/Boardgame-DSL.github.io.git
-          cp -r ./docs/ ./Boardgame-DSL.github.io/javascript/
+          cd docs
+          cp -r ./ ../Boardgame-DSL.github.io/javascript/
       - name: Push Update
         uses: actions-js/push@master
         with:
